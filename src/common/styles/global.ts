@@ -4,12 +4,10 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyles = createGlobalStyle`
   * {
     box-sizing: border-box;
-    /* font-family: 'Montserrat', sans-serif; */
-    /* font-family: 'Poppins', sans-serif; */
     font-family: 'Source Sans Pro', sans-serif;
+    color: ${({theme}) => theme.colors.text.primary};
     line-height: 1;
     margin: 0;
-    padding: 0;
     font-weight: 400;
     font-size: 16px;
 
