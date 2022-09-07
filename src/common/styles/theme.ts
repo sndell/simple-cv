@@ -10,7 +10,7 @@ const theme = {
     accent: 'red',
 
     text: {
-      primary: '#ffffffff',
+      primary: '#000000ff',
       secondary: 'rgb(181, 181, 181)',
       tertiary: 'rgb(107, 107, 107)',
     },
