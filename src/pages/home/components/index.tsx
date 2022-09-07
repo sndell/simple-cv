@@ -1,7 +1,18 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 type Props = {};
 
 const Home = (props: Props) => {
+  const navigate = useNavigate();
+
+  const handleNew = () => {
+    navigate('/editor');
+  };
+
+  const handleSaved = () => {
+    console.log('savveev');
+  };
+
   return (
     <Wrapper>
       <Content>
@@ -10,8 +21,12 @@ const Home = (props: Props) => {
           <p>Create and view dynamic CVs</p>
         </Text>
         <Buttons>
-          <button type="button">New</button>
-          <button type="button">Saved</button>
+          <button type="button" onClick={handleNew}>
+            New
+          </button>
+          <button type="button" onClick={handleSaved}>
+            Saved
+          </button>
         </Buttons>
       </Content>
     </Wrapper>
