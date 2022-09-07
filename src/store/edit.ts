@@ -1,17 +1,48 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ICV } from '../types/editor';
+
+const initialState: ICV = {
+  basic: {
+    name: '',
+    email: '',
+    phone: '',
+    title: '',
+    summary: '',
+    address: {
+      city: '',
+      country: '',
+      street: '',
+      zip: '',
+    },
+  },
+};
 
 export const edit = createSlice({
   name: 'edit',
-  initialState: {
-    mode: '',
-  },
+  initialState,
   reducers: {
-    SET_MODE: (state, action) => {
-      state.mode = action.payload;
+    CHANGE_BASIC: (state, action) => {
+      const { id, value } = action.payload;
+      
+      state.basic = {
+        ...state.basic,
+        [id]: value
+      }
     },
+
+    CHANGE_ADDRESS: (state, action) => {
+      const { id, value } = action.payload;
+      state.basic = {
+        ...state.basic,
+        address: {
+          ...state.basic?.address,
+          [id]: value
+        }
+      }
+    }
   },
 });
 
-export const { SET_MODE } = edit.actions;
-export const selectHeaders = (state: any) => state.auth.headers;
+export const { CHANGE_BASIC, CHANGE_ADDRESS } = edit.actions;
+export const selectBasic = (state: {edit: ICV}) => state.edit.basic;
 export default edit.reducer;

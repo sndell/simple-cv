@@ -1,16 +1,32 @@
-import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import { MdExpandMore, MdExpandLess } from 'react-icons/md';
-import { useState } from 'react';
-// import { IBasic } from '../../../types/editor';
+import { useDispatch, useSelector } from 'react-redux';
+import { CHANGE_BASIC, CHANGE_ADDRESS, selectBasic } from '../../../store/edit';
+import styled from 'styled-components';
 
 type Props = {};
 
 const Basic = (props: Props) => {
+  const dispatch = useDispatch();
+  const basic = useSelector(selectBasic);
   const [expanded, setExpanded] = useState(false);
+
   const toggleExpanded = () => {
-    setExpanded((old) => !old);
-    console.log('helo');
+    setExpanded((state) => !state);
   };
+
+  const handleBasic = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(CHANGE_BASIC({ id: e.target.id, value: e.target.value }));
+  };
+
+  const handleAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(CHANGE_ADDRESS({ id: e.target.id, value: e.target.value }));
+  };
+
+  useEffect(() => {
+    console.log(basic);
+  }, [basic]);
+
   return (
     <Wrapper>
       <Text>
@@ -20,37 +36,77 @@ const Basic = (props: Props) => {
       <Inputs>
         <Container>
           <label htmlFor="name">Full name</label>
-          <input type="text" id="name" />
+          <input
+            type="text"
+            id="name"
+            value={basic?.name}
+            onChange={handleBasic}
+          />
         </Container>
         <Container>
           <label htmlFor="title">Title</label>
-          <input type="text" id="title" />
+          <input
+            type="text"
+            id="title"
+            value={basic?.title}
+            onChange={handleBasic}
+          />
         </Container>
         <Container>
           <label htmlFor="email">Email</label>
-          <input type="text" id="email" />
+          <input
+            type="text"
+            id="email"
+            value={basic?.email}
+            onChange={handleBasic}
+          />
         </Container>
         <Container>
           <label htmlFor="phone">Phone</label>
-          <input type="text" id="phone" />
+          <input
+            type="text"
+            id="phone"
+            value={basic?.phone}
+            onChange={handleBasic}
+          />
         </Container>
         <Container>
           <label htmlFor="country">Country</label>
-          <input type="text" id="country" />
+          <input
+            type="text"
+            id="country"
+            value={basic?.address?.country}
+            onChange={handleAddress}
+          />
         </Container>
         <Container>
           <label htmlFor="city">City</label>
-          <input type="text" id="city" />
+          <input
+            type="text"
+            id="city"
+            value={basic?.address?.city}
+            onChange={handleAddress}
+          />
         </Container>
         {expanded && (
           <>
             <Container>
-              <label htmlFor="address">Adress</label>
-              <input type="text" id="address" />
+              <label htmlFor="street">Street</label>
+              <input
+                type="text"
+                id="street"
+                value={basic?.address?.street}
+                onChange={handleAddress}
+              />
             </Container>
             <Container>
               <label htmlFor="zip">Zip code</label>
-              <input type="text" id="zip" />
+              <input
+                type="text"
+                id="zip"
+                value={basic?.address?.zip}
+                onChange={handleAddress}
+              />
             </Container>
           </>
         )}

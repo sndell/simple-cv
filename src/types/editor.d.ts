@@ -9,7 +9,7 @@ export interface IBasic {
 
 export interface IAddress {
   street?: string,
-  zip?: number,
+  zip?: string,
   city?: string,
   country?: string,
 }
