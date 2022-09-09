@@ -9,6 +9,7 @@ const Preview = (props: Props) => {
 
 const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.secondary};
+  /* background-color: #303030; */
   height: 100vh;
 
   h1 {

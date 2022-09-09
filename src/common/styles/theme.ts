@@ -1,9 +1,8 @@
 const theme = {
   colors: {
     primary: '#f8f8f8',
-    secondary: '#070707',
-    secondary_dark: '#000000',
-    tertiary: '#303030',
+    secondary: '#191917',
+    tertiary: '#dbdad6',
     background: '#E6E4E2',
     selected: '#313131',
     hover: '#181818',
@@ -11,8 +10,8 @@ const theme = {
 
     text: {
       primary: '#000000ff',
-      secondary: 'rgb(181, 181, 181)',
-      tertiary: 'rgb(107, 107, 107)',
+      secondary: 'rgb(255, 255, 255)',
+      tertiary: 'rgb(247, 247, 247)',
     },
   },
 };

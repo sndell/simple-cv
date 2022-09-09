@@ -14,18 +14,12 @@ export interface IAddress {
   country?: string,
 }
 
-type Month = 1|2|3|4|5|6|7|8|9|10|11|12
-
-export interface IDate {
-  month: Month,
-  year: number
-}
-
 export interface IEmployment {
+  id: string,
   title?: string,
   company?: string,
-  from?: IDate,
-  to?: IDate
+  from?: string,
+  to?: string,
   city?: string,
   description?: string,
 }
@@ -33,8 +27,8 @@ export interface IEmployment {
 export interface IEducation {
   school: string,
   degree: string,
-  from?: IDate,
-  to?: IDate,
+  from?: string,
+  to?: string,
   city: string,
   description?: string,
 }
@@ -52,8 +46,8 @@ interface ISkill {
 }
 
 export interface ICV {
-  basic?: IBasic,
-  employment?: IEmployment[],
+  basic: IBasic,
+  employments: IEmployment[],
   education?: IEducation[],
   links?: ILink[],
   skills?: ISkill[],

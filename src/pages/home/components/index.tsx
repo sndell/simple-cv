@@ -65,7 +65,8 @@ const Buttons = styled.div`
   button {
     font-size: 10px;
     padding: 2px 6px;
-    border: 0.5px solid ${({ theme }) => theme.colors.secondary};
+    /* border: 0.5px solid ${({ theme }) => theme.colors.secondary}; */
+    border: none;
     border-radius: 2px;
     background-color: ${({ theme }) => theme.colors.primary};
     cursor: pointer;
