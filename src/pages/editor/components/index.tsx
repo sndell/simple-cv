@@ -10,8 +10,7 @@ const Editor = () => {
         <Basic />
         <Category category="employment" />
         <Category category="education" />
-        {/* <Employment />
-        <Education /> */}
+        <Category category="language" />
       </Details>
       <Preview />
     </Wrapper>

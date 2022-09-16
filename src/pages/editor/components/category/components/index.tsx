@@ -8,7 +8,7 @@ type Props = {
 };
 
 const Category = ({ category }: Props) => {
-  const toggle = useToggle();
+  const toggle = useToggle(true);
 
   const getTitle = () => {
     switch (category) {
@@ -23,13 +23,8 @@ const Category = ({ category }: Props) => {
 
   return (
     <Wrapper>
-      <Header title={getTitle()} toggle={toggle} />
-      {toggle.active && (
-        <List
-          category={category}
-          title={getTitle()?.toLocaleLowerCase()}
-        ></List>
-      )}
+      <Header title={category} toggle={toggle} />
+      {toggle.active && <List category={category}></List>}
     </Wrapper>
   );
 };

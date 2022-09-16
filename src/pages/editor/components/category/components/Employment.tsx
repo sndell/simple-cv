@@ -36,8 +36,8 @@ const Employment = ({ id, setTitle }: Props) => {
   ) => {
     dispatch(
       CHANGE_EMPLOYMENT({
-        employmentId: id,
-        id: e.target.id,
+        id,
+        property: e.target.id,
         value: e.target.value,
       })
     );

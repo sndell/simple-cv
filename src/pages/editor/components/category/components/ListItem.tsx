@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import useToggle from '../../../../../common/hooks/useToggle';
 import Education from './Education';
@@ -6,6 +6,7 @@ import Employment from './Employment';
 import { MdExpandMore } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectId, SET_ID } from '../../../../../store/input';
+import Language from './Language';
 
 type Props = {
   id: string;
@@ -14,6 +15,7 @@ type Props = {
 
 type StyledProps = {
   toggle: boolean;
+  height?: number;
 };
 
 const ListItem = ({ id, category }: Props) => {
@@ -21,12 +23,15 @@ const ListItem = ({ id, category }: Props) => {
   const [title, setTitle] = useState(category);
   const activeId = useSelector(selectId);
   const dispatch = useDispatch();
+  const ref = useRef<HTMLHeadingElement>(null);
 
   const getInputs = () => {
     if (category === 'education')
       return <Education id={id} setTitle={setTitle} />;
     else if (category === 'employment')
       return <Employment id={id} setTitle={setTitle} />;
+    else if (category === 'language')
+      return <Language id={id} setTitle={setTitle} />;
   };
 
   useEffect(() => {
@@ -45,10 +50,15 @@ const ListItem = ({ id, category }: Props) => {
         toggle={toggle.active}
       >
         <h1>{title}</h1>
-        {/* {toggle.active ? <MdExpandLess /> : <MdExpandMore />} */}
         <MdExpandMore />
       </Header>
-      <Content toggle={toggle.active}>{getInputs()}</Content>
+      <Content
+        toggle={toggle.active}
+        ref={ref}
+        height={ref.current?.scrollHeight}
+      >
+        {getInputs()}
+      </Content>
     </Wrapper>
   );
 };
@@ -59,7 +69,6 @@ const Wrapper = styled.div`
   padding: 0 16px;
   margin-bottom: 4px;
   overflow: hidden;
-  /* height: fit-content; */
 `;
 
 const Header = styled.div<StyledProps>`
@@ -85,10 +94,10 @@ const Header = styled.div<StyledProps>`
 `;
 
 const Content = styled.div<StyledProps>`
-  max-height: ${({ toggle }) => (toggle ? '295px' : '0')};
+  max-height: ${({ toggle, height }) => (toggle ? `${height}px` : '0')};
   opacity: ${({ toggle }) => (toggle ? 1 : 0)};
   transform: scale(${({ toggle }) => (toggle ? 1 : 0.95)});
-  transition: max-height 0.2s cubic-bezier(0.32, 1.17, 0.68, 0.86),
+  transition: max-height 0.25s cubic-bezier(0.32, 1.17, 0.68, 0.86),
     opacity 0.1s cubic-bezier(0.32, 1.17, 0.68, 0.86),
     transform 0.05s cubic-bezier(0.32, 1.17, 0.68, 0.86);
 `;

@@ -4,15 +4,12 @@ import { CHANGE_BASIC, CHANGE_ADDRESS, selectBasic } from '../../../store/edit';
 import styled from 'styled-components';
 import useToggle from '../../../common/hooks/useToggle';
 import Header from './Header';
-import { InputContainer } from '../styles/editor.styled';
 
-type Props = {};
-
-const Basic = (props: Props) => {
+const Basic = () => {
   const dispatch = useDispatch();
   const basic = useSelector(selectBasic);
   const additional = useToggle();
-  const expand = useToggle();
+  const expand = useToggle(true);
 
   const handleBasic = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(CHANGE_BASIC({ id: e.target.id, value: e.target.value }));
@@ -131,10 +128,33 @@ const Additional = styled.div`
 
 const Inputs = styled.div`
   display: grid;
-  grid-template-columns: calc(50% - 4px) calc(50% - 4px);
+  grid-template-columns: calc(50% - 8px) calc(50% - 8px);
   row-gap: 16px;
-  column-gap: 8px;
-  margin-top: 16px;
+  column-gap: 16px;
+`;
+
+const InputContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 16px;
+    font-weight: 300;
+    color: ${({ theme }) => theme.colors.text.primary};
+    /* color: black; */
+    margin-bottom: 8px;
+  }
+
+  input {
+    width: auto;
+    font-size: 16px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    background-color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 export default Basic;

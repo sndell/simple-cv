@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectEmplyments,
   selectEducations,
+  selectLanguages,
   NEW_EMPLOYMENT,
   NEW_EDUCATION,
+  NEW_LANGUAGE,
 } from '../../../../../store/edit';
 import { IEducation, IEmployment } from '../../../../../types/editor';
 
@@ -16,6 +18,7 @@ const useList = (category: string) => {
   const dispatch = useDispatch();
   const employments = useSelector(selectEmplyments);
   const educations = useSelector(selectEducations);
+  const languages = useSelector(selectLanguages);
   const [items, setItems] = useState<IEmployment[] | IEducation[] | []>([]);
 
   useEffect(() => {
@@ -30,6 +33,9 @@ const useList = (category: string) => {
       case 'education':
         dispatch(NEW_EDUCATION());
         break;
+      case 'language':
+        dispatch(NEW_LANGUAGE());
+        break;
       default:
         break;
     }
@@ -42,6 +48,9 @@ const useList = (category: string) => {
         break;
       case 'education':
         setItems(educations);
+        break;
+      case 'language':
+        setItems(languages);
         break;
       default:
         break;

@@ -1,17 +1,12 @@
 import { BsPlusLg } from 'react-icons/bs';
 import useList from '../hooks/useList';
 import styled from 'styled-components';
-import Employment from './Employment';
-import Education from './Education';
 import ListItem from './ListItem';
-import useToggle from '../../../../../common/hooks/useToggle';
-import { useState } from 'react';
 
 type Props = {
   category: string;
-  title: string;
 };
-const List = ({ category, title }: Props) => {
+const List = ({ category }: Props) => {
   const { items, newItem } = useList(category);
 
   return (
@@ -23,7 +18,7 @@ const List = ({ category, title }: Props) => {
       </Items>
       <Button onClick={newItem}>
         <BsPlusLg />
-        <h1>{`Add new ${title}`}</h1>
+        <h1>{`Add new ${category}`}</h1>
       </Button>
     </Wrapper>
   );

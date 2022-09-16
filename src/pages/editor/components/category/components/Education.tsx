@@ -36,8 +36,8 @@ const Education = ({ id, setTitle }: Props) => {
   ) => {
     dispatch(
       CHANGE_EDUCATION({
-        educationId: id,
-        id: e.target.id,
+        id: id,
+        property: e.target.id,
         value: e.target.value,
       })
     );
