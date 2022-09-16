@@ -5,15 +5,20 @@ import { MdExpandMore, MdExpandLess } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   CHANGE_EMPLOYMENT,
-  selectEmplymentById,
+  selectItemByCategoryAndId,
 } from '../../../../../store/edit';
-import { ICV, IEmployment } from '../../../../../types/editor';
+import { ICV, IEducation, IEmployment } from '../../../../../types/editor';
 
-const Job = (props: { id: string }) => {
+type Props = {
+  id: string;
+  category: string;
+};
+
+const ListItem = ({ id, category }: Props) => {
   const inputs = useToggle();
   const dispatch = useDispatch();
-  const employment: IEmployment = useSelector((state: { edit: ICV }) =>
-    selectEmplymentById(state, props.id)
+  const item: IEmployment | IEducation | undefined = useSelector(
+    (state: { edit: ICV }) => selectItemByCategoryAndId(state, id, category)
   );
 
   const handleInput = (
@@ -23,7 +28,7 @@ const Job = (props: { id: string }) => {
   ) => {
     dispatch(
       CHANGE_EMPLOYMENT({
-        employmentId: props.id,
+        employmentId: id,
         id: e.target.id,
         value: e.target.value,
       })
@@ -33,10 +38,8 @@ const Job = (props: { id: string }) => {
   return (
     <Wrapper>
       <Card onClick={inputs.toggleActive}>
-        {employment.title ? (
-          <h1>{`${employment.title} ${
-            employment.company && 'at ' + employment.company
-          }`}</h1>
+        {item.title ? (
+          <h1>{`${item.title} ${item.company && 'at ' + item.company}`}</h1>
         ) : (
           <h1>Employment</h1>
         )}
@@ -185,4 +188,4 @@ export const InputContainer = styled.div`
   }
 `;
 
-export default Job;
+export default ListItem;

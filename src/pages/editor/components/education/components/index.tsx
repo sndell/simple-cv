@@ -1,36 +1,36 @@
 import { MdExpandMore, MdExpandLess } from 'react-icons/md';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { NEW_EMPLOYMENT, selectEmplyments } from '../../../../../store/edit';
+import { NEW_EDUCATION, selectEducations } from '../../../../../store/edit';
 import { BsPlusLg } from 'react-icons/bs';
 import useToggle from '../../../../../common/hooks/useToggle';
-import Job from './Job';
+import School from './School';
 // import { Text } from '../../../styles/editor.styled';
 
 type Props = {};
 
-const Employment = (props: Props) => {
+const Education = (props: Props) => {
   const expanded = useToggle();
   const dispatch = useDispatch();
-  const employments = useSelector(selectEmplyments);
+  const educations = useSelector(selectEducations);
 
   const handleNew = () => {
-    dispatch(NEW_EMPLOYMENT());
+    dispatch(NEW_EDUCATION());
   };
 
   return (
     <Wrapper>
       {/* <Text onClick={expanded.toggleActive}>
         {expanded.active ? <MdExpandLess /> : <MdExpandMore />}
-        <h1>Employment History</h1>
+        <h1>Education</h1>
       </Text> */}
       {expanded.active && (
         <>
-          <Employments>
-            {employments.map((employment) => (
-              <Job id={employment.id} key={employment.id} />
+          <Educations>
+            {educations.map((employment) => (
+              <School id={employment.id} key={employment.id} />
             ))}
-          </Employments>
+          </Educations>
           <Create onClick={handleNew}>
             <BsPlusLg />
             <h1>Add new employment</h1>
@@ -41,11 +41,9 @@ const Employment = (props: Props) => {
   );
 };
 
-const Wrapper = styled.div`
-  padding-bottom: 16px;
-`;
+const Wrapper = styled.div``;
 
-const Employments = styled.div``;
+const Educations = styled.div``;
 
 const Create = styled.div`
   margin-top: 8px;
@@ -55,7 +53,7 @@ const Create = styled.div`
   /* justify-content: space-between; */
   cursor: pointer;
   /* border: 1px solid ${({ theme }) => theme.colors.secondary}; */
-  border-radius: 4px;
+  border-radius: 8px;
 
   h1 {
     /* font-weight: 600; */
@@ -68,4 +66,4 @@ const Create = styled.div`
   }
 `;
 
-export default Employment;
+export default Education;

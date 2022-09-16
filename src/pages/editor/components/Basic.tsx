@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CHANGE_BASIC, CHANGE_ADDRESS, selectBasic } from '../../../store/edit';
 import styled from 'styled-components';
 import useToggle from '../../../common/hooks/useToggle';
+import Header from './Header';
 import { InputContainer } from '../styles/editor.styled';
-import { Text } from '../styles/editor.styled';
 
 type Props = {};
 
@@ -12,7 +12,7 @@ const Basic = (props: Props) => {
   const dispatch = useDispatch();
   const basic = useSelector(selectBasic);
   const additional = useToggle();
-  const expanded = useToggle();
+  const expand = useToggle();
 
   const handleBasic = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(CHANGE_BASIC({ id: e.target.id, value: e.target.value }));
@@ -24,11 +24,12 @@ const Basic = (props: Props) => {
 
   return (
     <Wrapper>
-      <Text onClick={expanded.toggleActive}>
+      <Header title="Basic info" toggle={expand} />
+      {/* <Text onClick={expanded.toggleActive}>
         {expanded.active ? <MdExpandLess /> : <MdExpandMore />}
         <h1>Basic Info</h1>
-      </Text>
-      {expanded.active && (
+      </Text> */}
+      {expand.active && (
         <>
           <Inputs>
             <InputContainer>

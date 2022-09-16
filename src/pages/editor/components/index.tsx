@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import Preview from './Preview';
 import Employment from './employment/components';
+import Education from './education/components';
+import Category from './category/components';
 import Basic from './Basic';
 
 type Props = {};
@@ -10,7 +12,9 @@ const Editor = (props: Props) => {
     <Wrapper>
       <Details>
         <Basic />
-        <Employment />
+        <Category category="employment" />
+        {/* <Employment />
+        <Education /> */}
       </Details>
       <Preview />
     </Wrapper>
@@ -23,9 +27,11 @@ const Wrapper = styled.div`
 `;
 
 const Details = styled.div`
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 8px 80px;
+  padding: 8px 160px;
+  overflow-y: auto;
 `;
 
 export default Editor;

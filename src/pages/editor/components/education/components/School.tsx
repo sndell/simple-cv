@@ -4,16 +4,16 @@ import useToggle from '../../../../../common/hooks/useToggle';
 import { MdExpandMore, MdExpandLess } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  CHANGE_EMPLOYMENT,
-  selectEmplymentById,
+  CHANGE_EDUCATION,
+  selectEducationById,
 } from '../../../../../store/edit';
-import { ICV, IEmployment } from '../../../../../types/editor';
+import { ICV, IEducation, IEmployment } from '../../../../../types/editor';
 
-const Job = (props: { id: string }) => {
+const School = (props: { id: string }) => {
   const inputs = useToggle();
   const dispatch = useDispatch();
-  const employment: IEmployment = useSelector((state: { edit: ICV }) =>
-    selectEmplymentById(state, props.id)
+  const education: IEducation = useSelector((state: { edit: ICV }) =>
+    selectEducationById(state, props.id)
   );
 
   const handleInput = (
@@ -22,8 +22,8 @@ const Job = (props: { id: string }) => {
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     dispatch(
-      CHANGE_EMPLOYMENT({
-        employmentId: props.id,
+      CHANGE_EDUCATION({
+        educationId: props.id,
         id: e.target.id,
         value: e.target.value,
       })
@@ -33,12 +33,12 @@ const Job = (props: { id: string }) => {
   return (
     <Wrapper>
       <Card onClick={inputs.toggleActive}>
-        {employment.title ? (
-          <h1>{`${employment.title} ${
-            employment.company && 'at ' + employment.company
+        {education.degree ? (
+          <h1>{`${education.degree} ${
+            education.school && 'at ' + education.school
           }`}</h1>
         ) : (
-          <h1>Employment</h1>
+          <h1>Education</h1>
         )}
         {inputs.active ? <MdExpandLess /> : <MdExpandMore />}
       </Card>
@@ -46,20 +46,20 @@ const Job = (props: { id: string }) => {
         <>
           <Inputs>
             <InputContainer>
-              <label htmlFor="company">Company</label>
+              <label htmlFor="school">School</label>
               <input
                 type="text"
-                id="company"
-                value={employment?.company}
+                id="school"
+                value={education?.school}
                 onChange={handleInput}
               />
             </InputContainer>
             <InputContainer>
-              <label htmlFor="title">Title</label>
+              <label htmlFor="degree">Degree</label>
               <input
                 type="text"
-                id="title"
-                value={employment?.title}
+                id="degree"
+                value={education?.degree}
                 onChange={handleInput}
               />
             </InputContainer>
@@ -69,7 +69,7 @@ const Job = (props: { id: string }) => {
                 <input
                   type="text"
                   id="from"
-                  value={employment?.from}
+                  value={education?.from}
                   onChange={handleInput}
                 />
               </InputContainer>
@@ -78,7 +78,7 @@ const Job = (props: { id: string }) => {
                 <input
                   type="text"
                   id="to"
-                  value={employment?.to}
+                  value={education?.to}
                   onChange={handleInput}
                 />
               </InputContainer>
@@ -88,7 +88,7 @@ const Job = (props: { id: string }) => {
               <input
                 type="text"
                 id="city"
-                value={employment?.city}
+                value={education?.city}
                 onChange={handleInput}
               />
             </InputContainer>
@@ -97,7 +97,7 @@ const Job = (props: { id: string }) => {
           <textarea
             rows={4}
             id="description"
-            value={employment?.description}
+            value={education?.description}
             onChange={handleInput}
           />
         </>
@@ -185,4 +185,4 @@ export const InputContainer = styled.div`
   }
 `;
 
-export default Job;
+export default School;

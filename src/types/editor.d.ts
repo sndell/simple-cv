@@ -25,6 +25,7 @@ export interface IEmployment {
 }
 
 export interface IEducation {
+  id: string,
   school: string,
   degree: string,
   from?: string,
@@ -48,7 +49,7 @@ interface ISkill {
 export interface ICV {
   basic: IBasic,
   employments: IEmployment[],
-  education?: IEducation[],
+  education: IEducation[],
   links?: ILink[],
   skills?: ISkill[],
 }
