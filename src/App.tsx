@@ -15,7 +15,7 @@ const App = (props: Props) => {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Outlet />
-        {/* <Test /> */}
+        <Test />
       </ThemeProvider>
     </Provider>
   );

@@ -119,16 +119,14 @@ const Basic = (props: Props) => {
   );
 };
 
-const Wrapper = styled.div`
-  /* padding: 0px 80px; */
-  margin-bottom: 16px;
-`;
+const Wrapper = styled.div``;
 
 const Additional = styled.div`
   display: flex;
   margin-top: 8px;
   cursor: pointer;
   user-select: none;
+  margin-bottom: 16px;
 `;
 
 const Inputs = styled.div`

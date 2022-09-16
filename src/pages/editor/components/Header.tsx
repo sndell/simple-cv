@@ -18,6 +18,7 @@ const Header = ({ title, toggle }: Props) => {
 
 export const Text = styled.div`
   display: flex;
+  margin: 8px 0;
   margin-left: -24px;
   /* margin-bottom: 8px; */
   cursor: pointer;

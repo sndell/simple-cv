@@ -103,17 +103,11 @@ export const {
 export const selectBasic = (state: { edit: ICV }) => state.edit.basic;
 export const selectEmplyments = (state: { edit: ICV }) =>
   state.edit.employments;
+export const selectEmplymentById = (state: { edit: ICV }, id: string) =>
+  state.edit.employments.filter((item) => item.id === id)[0];
 export const selectEducations = (state: { edit: ICV }) => state.edit.education;
-export const selectItemByCategoryAndId = (
-  state: { edit: ICV },
-  id: string,
-  category: string
-) => {
-  if (category === 'employment')
-    return state.edit.employments.filter((item) => item.id === id)[0];
-  else if (category === 'education')
-    return state.edit.education.filter((item) => item.id === id)[0];
-};
+export const selectEducationById = (state: { edit: ICV }, id: string) =>
+  state.edit.education.filter((item) => item.id === id)[0];
 
 export const selectCv = (state: { edit: ICV }) => state.edit;
 export default edit.reducer;

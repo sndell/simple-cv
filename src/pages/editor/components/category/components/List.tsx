@@ -1,6 +1,8 @@
 import { BsPlusLg } from 'react-icons/bs';
 import useList from '../hooks/useList';
 import styled from 'styled-components';
+import Employment from './Employment';
+import Education from './Education';
 import ListItem from './ListItem';
 
 type Props = {
@@ -13,7 +15,7 @@ const List = ({ category, title }: Props) => {
     <Wrapper>
       <Items>
         {items.map((item) => (
-          <ListItem id={item.id} category={category} key={item.id} />
+          <ListItem key={item.id} category={category} id={item.id} />
         ))}
       </Items>
       <Button onClick={newItem}>
@@ -24,27 +26,22 @@ const List = ({ category, title }: Props) => {
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  margin-bottom: 24px;
+`;
 
 const Items = styled.div``;
 
 const Button = styled.div`
   margin-top: 8px;
-  /* padding: 8px 16px; */
+  width: fit-content;
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
   cursor: pointer;
-  /* border: 1px solid ${({ theme }) => theme.colors.secondary}; */
-  border-radius: 8px;
-
-  h1 {
-    /* font-weight: 600; */
-  }
 
   svg {
-    margin: 0 4px;
-    margin-top: 2px;
+    margin-right: 8px;
+    margin-top: 1px;
     font-size: 10px;
   }
 `;

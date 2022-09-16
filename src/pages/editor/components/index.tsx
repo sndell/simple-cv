@@ -1,18 +1,15 @@
 import styled from 'styled-components';
 import Preview from './Preview';
-import Employment from './employment/components';
-import Education from './education/components';
 import Category from './category/components';
 import Basic from './Basic';
 
-type Props = {};
-
-const Editor = (props: Props) => {
+const Editor = () => {
   return (
     <Wrapper>
       <Details>
         <Basic />
         <Category category="employment" />
+        <Category category="education" />
         {/* <Employment />
         <Education /> */}
       </Details>
@@ -23,7 +20,7 @@ const Editor = (props: Props) => {
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 60% 40%;
 `;
 
 const Details = styled.div`
