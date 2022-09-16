@@ -48,6 +48,7 @@ const ListItem = ({ id, category }: Props) => {
       <Header
         onClick={() => dispatch(SET_ID(toggle.active ? '' : id))}
         toggle={toggle.active}
+        tabIndex={-1}
       >
         <h1>{title}</h1>
         <MdExpandMore />
@@ -88,7 +89,6 @@ const Header = styled.div<StyledProps>`
   }
 
   h1 {
-    text-transform: capitalize;
     color: ${({ theme }) => theme.colors.text.tertiary};
   }
 `;
