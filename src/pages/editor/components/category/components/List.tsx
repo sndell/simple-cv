@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Employment from './Employment';
 import Education from './Education';
 import ListItem from './ListItem';
+import useToggle from '../../../../../common/hooks/useToggle';
+import { useState } from 'react';
 
 type Props = {
   category: string;
@@ -11,6 +13,7 @@ type Props = {
 };
 const List = ({ category, title }: Props) => {
   const { items, newItem } = useList(category);
+
   return (
     <Wrapper>
       <Items>

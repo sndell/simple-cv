@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { BsPlusLg } from 'react-icons/bs';
 import useToggle from '../../../../../common/hooks/useToggle';
 import List from './List';
 import Header from '../../Header';
@@ -9,7 +8,7 @@ type Props = {
 };
 
 const Category = ({ category }: Props) => {
-  const expand = useToggle();
+  const toggle = useToggle();
 
   const getTitle = () => {
     switch (category) {
@@ -24,8 +23,8 @@ const Category = ({ category }: Props) => {
 
   return (
     <Wrapper>
-      <Header title={getTitle()} toggle={expand} />
-      {expand.active && (
+      <Header title={getTitle()} toggle={toggle} />
+      {toggle.active && (
         <List
           category={category}
           title={getTitle()?.toLocaleLowerCase()}

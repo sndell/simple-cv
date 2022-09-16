@@ -93,6 +93,7 @@ const Description = styled.div`
     margin-top: 8px;
     margin-bottom: 16px;
     border-radius: 4px;
+    padding: 4px 2px;
     resize: none;
     border: none;
     outline: none;

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import useToggle from '../../../common/hooks/useToggle';
 import { MdExpandLess, MdExpandMore } from 'react-icons/md';
 
 type Props = {

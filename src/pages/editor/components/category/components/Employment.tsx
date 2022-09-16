@@ -92,6 +92,7 @@ const Description = styled.div`
   textarea {
     margin-top: 8px;
     margin-bottom: 16px;
+    padding: 4px 2px;
     border-radius: 4px;
     resize: none;
     border: none;
