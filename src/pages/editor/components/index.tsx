@@ -20,15 +20,15 @@ const Editor = () => {
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 60% 40%;
+  grid-template-columns: 10fr 9fr;
 `;
 
 const Details = styled.div`
   max-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 8px 160px;
-  overflow-y: auto;
+  padding: 8px 10%;
+  overflow-y: scroll;
 `;
 
 export default Editor;
