@@ -19,6 +19,8 @@ const initialState: ICV = {
   employments: [],
   educations: [],
   languages: [],
+  id: Date.now().toString(),
+  layout: 'default',
 };
 
 export const edit = createSlice({
@@ -122,6 +124,7 @@ export const {
   CHANGE_EDUCATION,
   CHANGE_LANGUAGE,
 } = edit.actions;
+
 export const selectBasic = (state: { edit: ICV }) => state.edit.basic;
 export const selectEmplyments = (state: { edit: ICV }) =>
   state.edit.employments;
@@ -133,6 +136,6 @@ export const selectEducationById = (state: { edit: ICV }, id: string) =>
 export const selectLanguages = (state: { edit: ICV }) => state.edit.languages;
 export const selectLanguageById = (state: { edit: ICV }, id: string) =>
   state.edit.languages.filter((item) => item.id === id)[0];
-
 export const selectCv = (state: { edit: ICV }) => state.edit;
+
 export default edit.reducer;

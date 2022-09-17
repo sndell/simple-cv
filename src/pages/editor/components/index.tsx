@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Preview from './Preview';
+import Preview from '../preview/components';
 import Category from './category/components';
 import Basic from './Basic';
 
@@ -27,7 +27,7 @@ const Details = styled.div`
   display: flex;
   flex-direction: column;
   padding: 8px 10%;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 export default Editor;

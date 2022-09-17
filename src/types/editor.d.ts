@@ -53,4 +53,6 @@ export interface ICV {
   educations: IEducation[];
   languages: ILanguages[];
   links?: ILink[];
+  layout: string;
+  id: string;
 }
