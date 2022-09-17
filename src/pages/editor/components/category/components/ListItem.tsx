@@ -81,7 +81,7 @@ const Header = styled.div<StyledProps>`
   user-select: none;
 
   svg {
-    fill: white;
+    fill: ${({ theme }) => theme.colors.text.tertiary};
     font-size: 24px;
     margin-right: -4px;
     transform: rotate(${({ toggle }) => (toggle ? 180 : 0)}deg);
