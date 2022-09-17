@@ -1,22 +1,24 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  CHANGE_EMPLOYMENT,
-  selectEmplymentById,
-} from '../../../../../store/edit';
-import { ICV, IEmployment } from '../../../../../types/editor';
+  CATEGORY_CHANGE,
+  selectByCategoryAndId,
+} from '../../../../../../store/edit';
+import { ICV, IEmployment } from '../../../../../../types/editor';
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import Input from '../../../../../common/components/Input';
+import Input from '../../../Input';
+import Textarea from '../../../Textarea';
 
 type Props = {
   id: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
+  category: string;
 };
 
-const Employment = ({ id, setTitle }: Props) => {
+const Employment = ({ id, setTitle, category }: Props) => {
   const dispatch = useDispatch();
   const item: IEmployment = useSelector((state: { edit: ICV }) =>
-    selectEmplymentById(state, id)
+    selectByCategoryAndId(state, category, id)
   );
 
   useEffect(() => {
@@ -35,10 +37,11 @@ const Employment = ({ id, setTitle }: Props) => {
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     dispatch(
-      CHANGE_EMPLOYMENT({
-        id,
+      CATEGORY_CHANGE({
+        id: id,
         property: e.target.id,
         value: e.target.value,
+        category: category,
       })
     );
   };
@@ -52,15 +55,11 @@ const Employment = ({ id, setTitle }: Props) => {
         <Input handleChange={handleChange} id="to" value={item.to} />
       </Container>
       <Input handleChange={handleChange} id="city" value={item.city} />
-      <Description>
-        <label htmlFor="description">Description</label>
-        <textarea
-          rows={4}
-          id="description"
-          value={item.description}
-          onChange={handleChange}
-        />
-      </Description>
+      <Textarea
+        handleChange={handleChange}
+        id="description"
+        value={item.description}
+      />
     </Wrapper>
   );
 };
@@ -76,29 +75,6 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: calc(50% - 8px) calc(50% - 8px);
   column-gap: 16px;
-`;
-
-const Description = styled.div`
-  grid-column-start: 1;
-  grid-row-start: 3;
-  grid-column-end: 3;
-  grid-row-end: 3;
-
-  label {
-    color: ${({ theme }) => theme.colors.text.secondary};
-    font-weight: 300;
-  }
-
-  textarea {
-    margin-top: 8px;
-    margin-bottom: 16px;
-    padding: 4px 2px;
-    border-radius: 4px;
-    resize: none;
-    border: none;
-    outline: none;
-    width: 100%;
-  }
 `;
 
 export default Employment;

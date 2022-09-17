@@ -1,13 +1,19 @@
 import { BsPlusLg } from 'react-icons/bs';
-import useList from '../hooks/useList';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { ICV } from '../../../../../types/editor';
+import { selectByCategory, CATEGORY_NEW } from '../../../../../store/edit';
 import ListItem from './ListItem';
 
 type Props = {
   category: string;
 };
+
 const List = ({ category }: Props) => {
-  const { items, newItem } = useList(category);
+  const items: { id: string }[] = useSelector((state: { edit: ICV }) =>
+    selectByCategory(state, category)
+  );
+  const dispatch = useDispatch();
 
   return (
     <Wrapper>
@@ -16,7 +22,7 @@ const List = ({ category }: Props) => {
           <ListItem key={item.id} category={category} id={item.id} />
         ))}
       </Items>
-      <Button onClick={newItem}>
+      <Button onClick={() => dispatch(CATEGORY_NEW({ category }))}>
         <BsPlusLg />
         <h1>{`Add new ${category}`}</h1>
       </Button>

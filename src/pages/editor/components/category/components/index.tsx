@@ -13,7 +13,7 @@ const Category = ({ category }: Props) => {
   return (
     <Wrapper>
       <Header title={`${category}s`} toggle={toggle} />
-      {toggle.active && <List category={category}></List>}
+      {toggle.active && <List category={category} />}
     </Wrapper>
   );
 };

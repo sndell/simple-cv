@@ -1,22 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  CHANGE_EDUCATION,
-  selectEducationById,
-} from '../../../../../store/edit';
-import { ICV, IEducation } from '../../../../../types/editor';
+  CATEGORY_CHANGE,
+  selectByCategoryAndId,
+} from '../../../../../../store/edit';
+import { ICV, IEducation } from '../../../../../../types/editor';
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import Input from '../../../../../common/components/Input';
+import Input from '../../../Input';
 
 type Props = {
   id: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
+  category: string;
 };
 
-const Education = ({ id, setTitle }: Props) => {
+const Education = ({ id, setTitle, category }: Props) => {
   const dispatch = useDispatch();
   const item: IEducation = useSelector((state: { edit: ICV }) =>
-    selectEducationById(state, id)
+    selectByCategoryAndId(state, category, id)
   );
 
   useEffect(() => {
@@ -35,10 +36,11 @@ const Education = ({ id, setTitle }: Props) => {
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     dispatch(
-      CHANGE_EDUCATION({
+      CATEGORY_CHANGE({
         id: id,
         property: e.target.id,
         value: e.target.value,
+        category: category,
       })
     );
   };
@@ -52,15 +54,7 @@ const Education = ({ id, setTitle }: Props) => {
         <Input handleChange={handleChange} id="to" value={item.to} />
       </Container>
       <Input handleChange={handleChange} id="city" value={item.city} />
-      <Description>
-        <label htmlFor="description">Description</label>
-        <textarea
-          rows={4}
-          id="description"
-          value={item.description}
-          onChange={handleChange}
-        />
-      </Description>
+      <Description></Description>
     </Wrapper>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ILanguage, ILevel } from '../../types/editor';
+import { ILevel } from '../../../types/editor';
 
 type Props = {
   value: ILevel;
@@ -58,8 +58,6 @@ const Range = ({ value, handleChange, label, id }: Props) => {
 };
 
 const Wrapper = styled.div<StyledProps>`
-  margin-top: 8px;
-  width: 100%;
   display: flex;
   flex-direction: column;
 

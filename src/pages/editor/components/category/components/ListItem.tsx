@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import useToggle from '../../../../../common/hooks/useToggle';
-import Education from './Education';
-import Employment from './Employment';
+import Education from './inputs/Education';
+import Employment from './inputs/Employment';
 import { MdExpandMore } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectId, SET_ID } from '../../../../../store/input';
-import Language from './Language';
+import Language from './inputs/Language';
 
 type Props = {
   id: string;
@@ -26,12 +26,15 @@ const ListItem = ({ id, category }: Props) => {
   const ref = useRef<HTMLHeadingElement>(null);
 
   const getInputs = () => {
-    if (category === 'education')
-      return <Education id={id} setTitle={setTitle} />;
-    else if (category === 'employment')
-      return <Employment id={id} setTitle={setTitle} />;
-    else if (category === 'language')
-      return <Language id={id} setTitle={setTitle} />;
+    const props = {
+      id: id,
+      setTitle: setTitle,
+      category: category,
+    };
+
+    if (category === 'education') return <Education {...props} />;
+    else if (category === 'employment') return <Employment {...props} />;
+    else if (category === 'language') return <Language {...props} />;
   };
 
   useEffect(() => {
@@ -81,7 +84,7 @@ const Header = styled.div<StyledProps>`
   user-select: none;
 
   svg {
-    fill: ${({ theme }) => theme.colors.text.tertiary};
+    fill: white;
     font-size: 24px;
     margin-right: -4px;
     transform: rotate(${({ toggle }) => (toggle ? 180 : 0)}deg);

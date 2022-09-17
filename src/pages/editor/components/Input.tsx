@@ -17,8 +17,6 @@ const Input = ({ value, handleChange, label, id }: Props) => {
 };
 
 const Wrapper = styled.div`
-  margin-top: 8px;
-  width: 100%;
   display: flex;
   flex-direction: column;
 

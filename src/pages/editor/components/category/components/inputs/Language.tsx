@@ -1,19 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { CHANGE_LANGUAGE, selectLanguageById } from '../../../../../store/edit';
-import { ICV, IEmployment, ILanguage } from '../../../../../types/editor';
+import {
+  CATEGORY_CHANGE,
+  selectByCategoryAndId,
+} from '../../../../../../store/edit';
+import { ICV, IEmployment, ILanguage } from '../../../../../../types/editor';
 import styled from 'styled-components';
 import React, { useEffect } from 'react';
-import Range from '../../../../../common/components/Range';
-import Input from '../../../../../common/components/Input';
+import Range from '../../../Range';
+import Input from '../../../Input';
 
 type Props = {
   id: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
+  category: string;
 };
-const Language = ({ id, setTitle }: Props) => {
+const Language = ({ id, setTitle, category }: Props) => {
   const dispatch = useDispatch();
   const item: ILanguage = useSelector((state: { edit: ICV }) =>
-    selectLanguageById(state, id)
+    selectByCategoryAndId(state, category, id)
   );
   const texts = ['Novice', 'Beginner', 'Intermediate', 'Advanced', 'Expert'];
 
@@ -29,23 +33,25 @@ const Language = ({ id, setTitle }: Props) => {
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(
-      CHANGE_LANGUAGE({
+      CATEGORY_CHANGE({
         id,
         property: e.target.id,
         value: e.target.value,
+        category: category,
       })
     );
   };
 
   const handleRange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(
-      CHANGE_LANGUAGE({
+      CATEGORY_CHANGE({
         id,
         property: e.target.id,
         value: {
           number: parseInt(e.target.value),
           text: texts[parseInt(e.target.value) - 1],
         },
+        category: category,
       })
     );
   };

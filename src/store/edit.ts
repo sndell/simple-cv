@@ -46,99 +46,127 @@ export const edit = createSlice({
       };
     },
 
-    NEW_EMPLOYMENT: (state) => {
-      const job: IEmployment = {
-        id: Date.now().toString(),
-        company: '',
-        title: '',
-        description: '',
-        city: '',
-        from: '',
-        to: '',
-      };
-      state.employments = [...state.employments, job];
+    CATEGORY_NEW: (state, action) => {
+      const { category } = action.payload;
+
+      switch (category) {
+        case 'employment':
+          const job: IEmployment = {
+            id: Date.now().toString(),
+            company: '',
+            title: '',
+            description: '',
+            city: '',
+            from: '',
+            to: '',
+          };
+          state.employments = [...state.employments, job];
+          break;
+        case 'education':
+          const school: IEducation = {
+            id: Date.now().toString(),
+            school: '',
+            degree: '',
+            description: '',
+            city: '',
+            from: '',
+            to: '',
+          };
+          state.educations = [...state.educations, school];
+          break;
+        case 'language':
+          const language: ILanguage = {
+            id: Date.now().toString(),
+            name: 'Swedish',
+            level: {
+              number: 5,
+              text: 'Expert',
+            },
+          };
+          state.languages = [...state.languages, language];
+          break;
+        default:
+          break;
+      }
     },
 
-    NEW_EDUCATION: (state) => {
-      const school: IEducation = {
-        id: Date.now().toString(),
-        school: '',
-        degree: '',
-        description: '',
-        city: '',
-        from: '',
-        to: '',
-      };
-      state.educations = [...state.educations, school];
-    },
+    CATEGORY_CHANGE: (state, action) => {
+      const { id, property, value, category } = action.payload;
 
-    NEW_LANGUAGE: (state) => {
-      const language: ILanguage = {
-        id: Date.now().toString(),
-        name: 'Swedish',
-        level: {
-          number: 5,
-          text: 'Expert',
-        },
-      };
-      state.languages = [...state.languages, language];
-    },
-
-    CHANGE_EMPLOYMENT: (state, action) => {
-      const { id, property, value } = action.payload;
-
-      state.employments = [
-        ...state.employments.map((item) =>
-          item.id === id ? { ...item, [property]: value } : item
-        ),
-      ];
-    },
-
-    CHANGE_EDUCATION: (state, action) => {
-      const { id, property, value } = action.payload;
-
-      state.educations = [
-        ...state.educations.map((item) =>
-          item.id === id ? { ...item, [property]: value } : item
-        ),
-      ];
-    },
-
-    CHANGE_LANGUAGE: (state, action) => {
-      const { id, property, value } = action.payload;
-      console.log(value);
-
-      state.languages = [
-        ...state.languages.map((item) =>
-          item.id === id ? { ...item, [property]: value } : item
-        ),
-      ];
+      switch (category) {
+        case 'employment':
+          state.employments = [
+            ...state.employments.map((item) =>
+              item.id === id ? { ...item, [property]: value } : item
+            ),
+          ];
+          break;
+        case 'education':
+          state.educations = [
+            ...state.educations.map((item) =>
+              item.id === id ? { ...item, [property]: value } : item
+            ),
+          ];
+          break;
+        case 'language':
+          state.languages = [
+            ...state.languages.map((item) =>
+              item.id === id ? { ...item, [property]: value } : item
+            ),
+          ];
+          break;
+        default:
+          break;
+      }
     },
   },
 });
 
-export const {
-  CHANGE_BASIC,
-  CHANGE_ADDRESS,
-  NEW_EMPLOYMENT,
-  NEW_EDUCATION,
-  NEW_LANGUAGE,
-  CHANGE_EMPLOYMENT,
-  CHANGE_EDUCATION,
-  CHANGE_LANGUAGE,
-} = edit.actions;
+export const { CHANGE_BASIC, CHANGE_ADDRESS, CATEGORY_NEW, CATEGORY_CHANGE } =
+  edit.actions;
 
-export const selectBasic = (state: { edit: ICV }) => state.edit.basic;
-export const selectEmplyments = (state: { edit: ICV }) =>
-  state.edit.employments;
-export const selectEmplymentById = (state: { edit: ICV }, id: string) =>
-  state.edit.employments.filter((item) => item.id === id)[0];
-export const selectEducations = (state: { edit: ICV }) => state.edit.educations;
-export const selectEducationById = (state: { edit: ICV }, id: string) =>
-  state.edit.educations.filter((item) => item.id === id)[0];
-export const selectLanguages = (state: { edit: ICV }) => state.edit.languages;
-export const selectLanguageById = (state: { edit: ICV }, id: string) =>
-  state.edit.languages.filter((item) => item.id === id)[0];
 export const selectCv = (state: { edit: ICV }) => state.edit;
+export const selectBasic = (state: { edit: ICV }) => state.edit.basic;
+export const selectByCategory = (state: { edit: ICV }, category: string) => {
+  switch (category) {
+    case 'employment':
+      const employmentIds: { id: string }[] = state.edit.employments.map(
+        (item) => {
+          return { id: item.id };
+        }
+      );
+      return employmentIds;
+    case 'education':
+      const educationIds: { id: string }[] = state.edit.educations.map(
+        (item) => {
+          return { id: item.id };
+        }
+      );
+      return educationIds;
+    case 'language':
+      const languageIds: { id: string }[] = state.edit.languages.map((item) => {
+        return { id: item.id };
+      });
+      return languageIds;
+    default:
+      return [];
+  }
+};
+export const selectByCategoryAndId = (
+  state: { edit: ICV },
+  category: string,
+  id: string
+) => {
+  switch (category) {
+    case 'employment':
+      return state.edit.employments.filter((item) => item.id === id)[0];
+    case 'education':
+      return state.edit.educations.filter((item) => item.id === id)[0];
+    case 'language':
+      return state.edit.languages.filter((item) => item.id === id)[0];
+    default:
+      return;
+  }
+};
 
 export default edit.reducer;
