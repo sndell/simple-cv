@@ -3,16 +3,16 @@ import { ICV, IEducation, IEmployment, ILanguage } from '../types/editor';
 
 const initialState: ICV = {
   basic: {
-    name: '',
-    email: '',
-    phone: '',
-    title: '',
+    name: 'Elias Bergström',
+    email: 'elias@gmail.com',
+    phone: '0701234123',
+    title: 'Developer',
     summary: '',
     address: {
-      city: '',
-      country: '',
-      street: '',
-      zip: '',
+      city: 'Stockholm',
+      country: 'Sweden',
+      street: 'Korphoppsgatan 33',
+      zip: '120 64',
     },
   },
   employments: [],
@@ -75,7 +75,7 @@ export const edit = createSlice({
     NEW_LANGUAGE: (state) => {
       const language: ILanguage = {
         id: Date.now().toString(),
-        name: '',
+        name: 'Swedish',
         level: {
           number: 5,
           text: 'Expert',

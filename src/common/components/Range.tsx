@@ -19,10 +19,10 @@ const Range = ({ value, handleChange, label, id }: Props) => {
   useEffect(() => {
     switch (value.number) {
       case 1:
-        setColor('#f45c5c');
+        setColor('#f66868');
         break;
       case 2:
-        setColor('#f4f179');
+        setColor('#f6f48b');
         break;
       case 3:
         setColor('#74e49f');
@@ -75,7 +75,7 @@ const Wrapper = styled.div<StyledProps>`
     }
   }
 
-  input {
+  input[type='range'] {
     height: 36px;
     border-radius: 4px;
     overflow: hidden;
@@ -84,6 +84,21 @@ const Wrapper = styled.div<StyledProps>`
     opacity: 0.5;
     -webkit-appearance: none;
     cursor: pointer;
+    outline: none;
+
+    ::-webkit-slider-runnable-track {
+      height: 36px;
+    }
+
+    ::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 36px;
+      border: none;
+      border-radius: 4px;
+      width: 20%;
+      transition: all 0.35s cubic-bezier(0.32, 1.17, 0.68, 0.86);
+      background-color: ${({ color }) => color};
+    }
 
     ::-moz-range-progress {
       height: 0;

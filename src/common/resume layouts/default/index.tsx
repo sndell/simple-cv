@@ -20,8 +20,8 @@ const Default = ({ resume }: Props) => {
           <h1>Details</h1>
           <p>{resume.basic.address?.street}</p>
           <p>{resume.basic.address?.zip}</p>
-          <p>{resume.basic.address?.country}</p>
           <p>{resume.basic.address?.city}</p>
+          <p>{resume.basic.address?.country}</p>
           <p>{resume.basic.phone}</p>
           <p>{resume.basic.email}</p>
         </Details>

@@ -7,7 +7,7 @@ const theme = {
     background: '#E6E4E2',
     selected: '#313131',
     hover: '#181818',
-    accent: 'red',
+    accent: '#da8e36',
 
     text: {
       primary: '#000000ff',
