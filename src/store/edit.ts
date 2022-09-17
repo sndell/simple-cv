@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ICV, IEducation, IEmployment, ILanguage } from '../types/editor';
+import {
+  ICV,
+  IEducation,
+  IEmployment,
+  ILanguage,
+  ISkill,
+} from '../types/editor';
 
 const initialState: ICV = {
   basic: {
@@ -18,6 +24,7 @@ const initialState: ICV = {
   employments: [],
   educations: [],
   languages: [],
+  skills: [],
   id: Date.now().toString(),
   layout: 'default',
 };
@@ -85,6 +92,17 @@ export const edit = createSlice({
           };
           state.languages = [...state.languages, language];
           break;
+        case 'skill':
+          const skill: ISkill = {
+            id: Date.now().toString(),
+            name: '',
+            level: {
+              number: 5,
+              text: 'Expert',
+            },
+          };
+          state.skills = [...state.skills, skill];
+          break;
         default:
           break;
       }
@@ -111,6 +129,13 @@ export const edit = createSlice({
         case 'language':
           state.languages = [
             ...state.languages.map((item) =>
+              item.id === id ? { ...item, [property]: value } : item
+            ),
+          ];
+          break;
+        case 'skill':
+          state.skills = [
+            ...state.skills.map((item) =>
               item.id === id ? { ...item, [property]: value } : item
             ),
           ];
@@ -148,6 +173,11 @@ export const selectByCategory = (state: { edit: ICV }, category: string) => {
         return { id: item.id };
       });
       return languageIds;
+    case 'skill':
+      const skillIds: { id: string }[] = state.edit.skills.map((item) => {
+        return { id: item.id };
+      });
+      return skillIds;
     default:
       return [];
   }
@@ -164,6 +194,8 @@ export const selectByCategoryAndId = (
       return state.edit.educations.filter((item) => item.id === id)[0];
     case 'language':
       return state.edit.languages.filter((item) => item.id === id)[0];
+    case 'skill':
+      return state.edit.skills.filter((item) => item.id === id)[0];
     default:
       return;
   }

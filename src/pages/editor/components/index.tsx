@@ -11,6 +11,7 @@ const Editor = () => {
         <Category category="employment" />
         <Category category="education" />
         <Category category="language" />
+        <Category category="skill" />
       </Details>
       <Preview />
     </Wrapper>
@@ -20,7 +21,6 @@ const Editor = () => {
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 10fr 9fr;
-  /* display: flex; */
 `;
 
 const Details = styled.div`

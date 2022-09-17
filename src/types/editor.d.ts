@@ -52,11 +52,18 @@ interface ILanguage {
   level: ILevel;
 }
 
+interface ISkill {
+  id: string;
+  name?: string;
+  level: ILevel;
+}
+
 export interface ICV {
   basic: IBasic;
   employments: IEmployment[];
   educations: IEducation[];
   languages: ILanguages[];
+  skills: ISkill[];
   links?: ILink[];
   layout: string;
   id: string;
