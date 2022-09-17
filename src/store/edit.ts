@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { isTemplateSpan } from 'typescript';
 import { ICV, IEducation, IEmployment, ILanguage } from '../types/editor';
 
 const initialState: ICV = {
@@ -77,7 +76,10 @@ export const edit = createSlice({
       const language: ILanguage = {
         id: Date.now().toString(),
         name: '',
-        level: '',
+        level: {
+          number: 5,
+          text: 'Expert',
+        },
       };
       state.languages = [...state.languages, language];
     },
@@ -104,6 +106,7 @@ export const edit = createSlice({
 
     CHANGE_LANGUAGE: (state, action) => {
       const { id, property, value } = action.payload;
+      console.log(value);
 
       state.languages = [
         ...state.languages.map((item) =>

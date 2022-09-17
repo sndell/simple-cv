@@ -10,10 +10,6 @@ import {
 } from '../../../../../store/edit';
 import { IEducation, IEmployment } from '../../../../../types/editor';
 
-type Props = {
-  category: string;
-};
-
 const useList = (category: string) => {
   const dispatch = useDispatch();
   const employments = useSelector(selectEmplyments);

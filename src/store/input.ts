@@ -1,6 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { isTemplateSpan } from 'typescript';
-import { ICV } from '../types/editor';
 
 const initialState: { id: string } = {
   id: '',

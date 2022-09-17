@@ -11,11 +11,11 @@ const Preview = () => {
 
 const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.secondary};
-  padding: 32px 32px;
   height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 
   h1 {
     color: white;

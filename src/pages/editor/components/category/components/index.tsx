@@ -10,17 +10,6 @@ type Props = {
 const Category = ({ category }: Props) => {
   const toggle = useToggle(true);
 
-  const getTitle = () => {
-    switch (category) {
-      case 'employment':
-        return 'Employment';
-      case 'education':
-        return 'Education';
-      default:
-        return '';
-    }
-  };
-
   return (
     <Wrapper>
       <Header title={`${category}s`} toggle={toggle} />
@@ -30,26 +19,5 @@ const Category = ({ category }: Props) => {
 };
 
 const Wrapper = styled.div``;
-
-const Create = styled.div`
-  margin-top: 8px;
-  /* padding: 8px 16px; */
-  display: flex;
-  align-items: center;
-  /* justify-content: space-between; */
-  cursor: pointer;
-  /* border: 1px solid ${({ theme }) => theme.colors.secondary}; */
-  border-radius: 8px;
-
-  h1 {
-    /* font-weight: 600; */
-  }
-
-  svg {
-    margin: 0 4px;
-    margin-top: 2px;
-    font-size: 10px;
-  }
-`;
 
 export default Category;

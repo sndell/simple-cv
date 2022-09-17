@@ -13,6 +13,7 @@ const theme = {
       primary: '#000000ff',
       secondary: 'rgb(255, 255, 255)',
       tertiary: 'rgb(247, 247, 247)',
+      quaternary: 'rgb(91, 92, 95)',
     },
   },
 };

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Preview from '../preview/components';
+import Preview from './preview/components';
 import Category from './category/components';
 import Basic from './Basic';
 
@@ -20,6 +20,7 @@ const Editor = () => {
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 10fr 9fr;
+  /* display: flex; */
 `;
 
 const Details = styled.div`

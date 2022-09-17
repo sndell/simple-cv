@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CHANGE_LANGUAGE, selectLanguageById } from '../../../../../store/edit';
 import { ICV, IEmployment, ILanguage } from '../../../../../types/editor';
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import Range from '../../../../../common/components/Range';
 import Input from '../../../../../common/components/Input';
 
 type Props = {
@@ -14,22 +15,19 @@ const Language = ({ id, setTitle }: Props) => {
   const item: ILanguage = useSelector((state: { edit: ICV }) =>
     selectLanguageById(state, id)
   );
+  const texts = ['Novice', 'Beginner', 'Intermediate', 'Advanced', 'Expert'];
 
   useEffect(() => {
     setTitle(
       item.name
         ? item.level
-          ? `${item.level} in ${item.name}`
+          ? `${item.level.text} at ${item.name}`
           : item.name
         : 'Language'
     );
   }, [item]);
 
-  const handleChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(
       CHANGE_LANGUAGE({
         id,
@@ -39,10 +37,23 @@ const Language = ({ id, setTitle }: Props) => {
     );
   };
 
+  const handleRange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      CHANGE_LANGUAGE({
+        id,
+        property: e.target.id,
+        value: {
+          number: parseInt(e.target.value),
+          text: texts[parseInt(e.target.value) - 1],
+        },
+      })
+    );
+  };
+
   return (
     <Wrapper>
-      <Input handleChange={handleChange} id="name" value={item.name} />
-      <Input handleChange={handleChange} id="level" value={item.level} />
+      <Input handleChange={handleInput} id="name" value={item.name} />
+      <Range id="level" value={item.level} handleChange={handleRange} />
     </Wrapper>
   );
 };

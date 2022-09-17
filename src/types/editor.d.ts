@@ -41,10 +41,15 @@ interface ILink {
 
 type Experience = 1 | 2 | 3 | 4 | 5;
 
+interface ILevel {
+  number: Experience;
+  text: string;
+}
+
 interface ILanguage {
   id: string;
   name?: string;
-  level?: string;
+  level: ILevel;
 }
 
 export interface ICV {
