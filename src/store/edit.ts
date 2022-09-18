@@ -7,6 +7,8 @@ import {
   ISkill,
 } from '../types/editor';
 
+type ObjectKey = 'employments' | 'educations' | 'languages' | 'skills';
+
 const initialState: ICV = {
   basic: {
     name: 'Elias Bergström',
@@ -111,38 +113,22 @@ export const edit = createSlice({
     CATEGORY_CHANGE: (state, action) => {
       const { id, property, value, category } = action.payload;
 
-      switch (category) {
-        case 'employment':
-          state.employments = [
-            ...state.employments.map((item) =>
-              item.id === id ? { ...item, [property]: value } : item
-            ),
-          ];
-          break;
-        case 'education':
-          state.educations = [
-            ...state.educations.map((item) =>
-              item.id === id ? { ...item, [property]: value } : item
-            ),
-          ];
-          break;
-        case 'language':
-          state.languages = [
-            ...state.languages.map((item) =>
-              item.id === id ? { ...item, [property]: value } : item
-            ),
-          ];
-          break;
-        case 'skill':
-          state.skills = [
-            ...state.skills.map((item) =>
-              item.id === id ? { ...item, [property]: value } : item
-            ),
-          ];
-          break;
-        default:
-          break;
-      }
+      const objects = {
+        educations: [...state.educations],
+        employments: [...state.employments],
+        languages: [...state.languages],
+        skills: [...state.skills],
+      };
+
+      type ObjectKey = keyof typeof objects;
+      const formatted = `${category}s` as ObjectKey;
+
+      return {
+        ...state,
+        [formatted]: state[formatted].map((item: { id: string }) =>
+          item.id === id ? { ...item, [property]: value } : item
+        ),
+      };
     },
   },
 });
@@ -153,52 +139,16 @@ export const { CHANGE_BASIC, CHANGE_ADDRESS, CATEGORY_NEW, CATEGORY_CHANGE } =
 export const selectCv = (state: { edit: ICV }) => state.edit;
 export const selectBasic = (state: { edit: ICV }) => state.edit.basic;
 export const selectByCategory = (state: { edit: ICV }, category: string) => {
-  switch (category) {
-    case 'employment':
-      const employmentIds: { id: string }[] = state.edit.employments.map(
-        (item) => {
-          return { id: item.id };
-        }
-      );
-      return employmentIds;
-    case 'education':
-      const educationIds: { id: string }[] = state.edit.educations.map(
-        (item) => {
-          return { id: item.id };
-        }
-      );
-      return educationIds;
-    case 'language':
-      const languageIds: { id: string }[] = state.edit.languages.map((item) => {
-        return { id: item.id };
-      });
-      return languageIds;
-    case 'skill':
-      const skillIds: { id: string }[] = state.edit.skills.map((item) => {
-        return { id: item.id };
-      });
-      return skillIds;
-    default:
-      return [];
-  }
+  const formatted = `${category}s` as ObjectKey;
+  return state.edit[formatted].map((item) => ({ id: item.id }));
 };
 export const selectByCategoryAndId = (
   state: { edit: ICV },
   category: string,
   id: string
 ) => {
-  switch (category) {
-    case 'employment':
-      return state.edit.employments.filter((item) => item.id === id)[0];
-    case 'education':
-      return state.edit.educations.filter((item) => item.id === id)[0];
-    case 'language':
-      return state.edit.languages.filter((item) => item.id === id)[0];
-    case 'skill':
-      return state.edit.skills.filter((item) => item.id === id)[0];
-    default:
-      return;
-  }
+  const formatted = `${category}s` as ObjectKey;
+  return state.edit[formatted].filter((item) => item.id === id)[0];
 };
 
 export default edit.reducer;
