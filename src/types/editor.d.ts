@@ -60,10 +60,10 @@ interface ISkill {
 
 export interface ICV {
   basic: IBasic;
-  employments: IEmployment[];
-  educations: IEducation[];
-  languages: ILanguages[];
-  skills: ISkill[];
+  employment: IEmployment[];
+  education: IEducation[];
+  language: ILanguages[];
+  skill: ISkill[];
   links?: ILink[];
   layout: string;
   id: string;

@@ -28,13 +28,13 @@ const Default = ({ resume }: Props) => {
         </Details>
         <Details>
           <h1>Languages</h1>
-          {resume.languages.map((language: ILanguage) => (
+          {resume.language.map((language: ILanguage) => (
             <Language {...language} key={language.id} />
           ))}
         </Details>
         <Details>
           <h1>Skills</h1>
-          {resume.skills.map((skill: ISkill) => (
+          {resume.skill.map((skill: ISkill) => (
             <Skill {...skill} key={skill.id} />
           ))}
         </Details>
