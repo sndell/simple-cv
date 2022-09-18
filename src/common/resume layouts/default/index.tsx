@@ -1,6 +1,7 @@
-import { ICV, ILanguage } from '../../../types/editor';
+import { ICV, ILanguage, ISkill } from '../../../types/editor';
 import Language from './Language';
 import styled from 'styled-components';
+import Skill from './Skill';
 
 type Props = {
   resume: ICV;
@@ -29,6 +30,12 @@ const Default = ({ resume }: Props) => {
           <h1>Languages</h1>
           {resume.languages.map((language: ILanguage) => (
             <Language {...language} key={language.id} />
+          ))}
+        </Details>
+        <Details>
+          <h1>Skills</h1>
+          {resume.skills.map((skill: ISkill) => (
+            <Skill {...skill} key={skill.id} />
           ))}
         </Details>
       </Sidebar>

@@ -95,7 +95,7 @@ export const edit = createSlice({
         case 'skill':
           const skill: ISkill = {
             id: Date.now().toString(),
-            name: '',
+            name: 'problem solving',
             level: {
               number: 5,
               text: 'Expert',
