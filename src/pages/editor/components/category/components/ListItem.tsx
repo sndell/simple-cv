@@ -7,6 +7,8 @@ import { MdExpandMore } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectId, SET_ID } from '../../../../../store/input';
 import Language from './inputs/Language';
+import { ObjectKey } from '../../../../../types/global';
+import Link from './inputs/Link';
 import Skill from './inputs/Skill';
 
 type Props = {
@@ -33,10 +35,16 @@ const ListItem = ({ id, category }: Props) => {
       category: category,
     };
 
-    if (category === 'education') return <Education {...props} />;
-    else if (category === 'employment') return <Employment {...props} />;
-    else if (category === 'language') return <Language {...props} />;
-    else if (category === 'skill') return <Skill {...props} />;
+    const inputs = {
+      employment: <Employment {...props} />,
+      education: <Education {...props} />,
+      language: <Language {...props} />,
+      skill: <Skill {...props} />,
+      link: <Link {...props} />,
+    };
+
+    const key = category as ObjectKey;
+    return inputs[key];
   };
 
   useEffect(() => {

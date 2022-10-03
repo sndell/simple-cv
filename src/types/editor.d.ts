@@ -35,8 +35,9 @@ export interface IEducation {
 }
 
 interface ILink {
-  label: string;
-  url: string;
+  id: string;
+  label?: string;
+  url?: string;
 }
 
 type Experience = 1 | 2 | 3 | 4 | 5;
@@ -64,7 +65,7 @@ export interface ICV {
   education: IEducation[];
   language: ILanguages[];
   skill: ISkill[];
-  links?: ILink[];
+  link: ILink[];
   layout: string;
   id: string;
 }

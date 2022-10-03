@@ -1,7 +1,6 @@
-import { ICV, ILanguage, ISkill } from '../../../types/editor';
-import Language from './Language';
+import { ICV, ILanguage, ILink, ISkill } from '../../../types/editor';
 import styled from 'styled-components';
-import Skill from './Skill';
+import Detail from './Detail';
 
 type Props = {
   resume: ICV;
@@ -29,13 +28,27 @@ const Default = ({ resume }: Props) => {
         <Details>
           <h1>Languages</h1>
           {resume.language.map((language: ILanguage) => (
-            <Language {...language} key={language.id} />
+            <Detail
+              primary={language.name}
+              secondary={language.level.text}
+              key={language.id}
+            />
           ))}
         </Details>
         <Details>
           <h1>Skills</h1>
           {resume.skill.map((skill: ISkill) => (
-            <Skill {...skill} key={skill.id} />
+            <Detail
+              primary={skill.name}
+              secondary={skill.level.text}
+              key={skill.id}
+            />
+          ))}
+        </Details>
+        <Details>
+          <h1>Links</h1>
+          {resume.link.map((link: ILink) => (
+            <Detail primary={link.label} secondary={link.url} key={link.id} />
           ))}
         </Details>
       </Sidebar>

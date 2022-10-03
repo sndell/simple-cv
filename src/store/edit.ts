@@ -4,10 +4,10 @@ import {
   IEducation,
   IEmployment,
   ILanguage,
+  ILink,
   ISkill,
 } from '../types/editor';
-
-type ObjectKey = 'employment' | 'education' | 'language' | 'skill';
+import { ObjectKey } from '../types/global';
 
 const initialState: ICV = {
   basic: {
@@ -27,6 +27,7 @@ const initialState: ICV = {
   education: [],
   language: [],
   skill: [],
+  link: [],
   id: Date.now().toString(),
   layout: 'default',
 };
@@ -62,6 +63,7 @@ export const edit = createSlice({
         education: IEducation;
         language: ILanguage;
         skill: ISkill;
+        link: ILink;
       } = {
         employment: {
           id: Date.now().toString(),
@@ -96,6 +98,11 @@ export const edit = createSlice({
             number: 5,
             text: 'Expert',
           },
+        },
+        link: {
+          id: Date.now().toString(),
+          label: '',
+          url: '',
         },
       };
 

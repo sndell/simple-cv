@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 import { ILanguage } from '../../../types/editor';
 
-const Language = ({ name, level }: ILanguage) => {
+type Props = {
+  primary?: string;
+  secondary?: string;
+};
+
+const Detail = ({ primary, secondary }: Props) => {
   return (
     <Wrapper>
-      <p>{name}</p>
-      <p>{level?.text}</p>
+      <p>{primary}</p>
+      <p>{secondary}</p>
     </Wrapper>
   );
 };
@@ -25,4 +30,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default Language;
+export default Detail;
